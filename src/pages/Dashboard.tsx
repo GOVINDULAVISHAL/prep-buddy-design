@@ -92,7 +92,7 @@ export default function Dashboard() {
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
             {/* User Profile Card */}
-            <Card className="shadow-md border-0">
+            <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardContent className="p-6 text-center">
                 <Avatar className="h-20 w-20 mx-auto mb-4 ring-4 ring-primary/20">
                   <AvatarImage src={user.avatar} />
@@ -135,7 +135,7 @@ export default function Dashboard() {
             </Card>
 
             {/* Quick Stats */}
-            <Card className="shadow-md border-0">
+            <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center space-x-2">
                   <TrendingUp className="h-5 w-5 text-primary" />
@@ -162,7 +162,7 @@ export default function Dashboard() {
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-6">
             {/* Daily Quiz Section */}
-            <Card className="shadow-md border-0 bg-gradient-to-r from-primary/5 to-secondary/5">
+            <Card className="border border-border/50 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardHeader>
                 <CardTitle className="text-xl flex items-center space-x-2">
                   <Brain className="h-6 w-6 text-primary" />
@@ -193,7 +193,7 @@ export default function Dashboard() {
             </Card>
 
             {/* Learning Modules */}
-            <Card className="shadow-md border-0">
+            <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardHeader>
                 <CardTitle className="text-xl flex items-center space-x-2">
                   <Target className="h-6 w-6 text-secondary" />
@@ -205,7 +205,7 @@ export default function Dashboard() {
                   {modules.map((module) => {
                     const IconComponent = module.icon;
                     return (
-                      <Card key={module.id} className="border border-border hover:shadow-md transition-shadow cursor-pointer">
+                      <Card key={module.id} className="border border-border/50 rounded-xl cursor-pointer transition-all duration-200 hover:border-border" style={{ boxShadow: 'var(--shadow-sm)' }} onMouseEnter={(e) => e.currentTarget.style.boxShadow = 'var(--shadow-md)'} onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'var(--shadow-sm)'}>
                         <CardContent className="p-4">
                           <div className="flex items-center space-x-3 mb-3">
                             <div className={`p-2 rounded-lg ${module.color}`}>
@@ -236,7 +236,7 @@ export default function Dashboard() {
             </Card>
 
             {/* Leaderboard */}
-            <Card className="shadow-md border-0">
+            <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardHeader>
                 <CardTitle className="text-xl flex items-center space-x-2">
                   <Trophy className="h-6 w-6 text-accent" />

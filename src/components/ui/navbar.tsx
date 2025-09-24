@@ -12,7 +12,7 @@ export function Navbar({ onLoginClick, onSignupClick }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
+    <nav className="bg-card/95 backdrop-blur-md border-b border-border/50 sticky top-0 z-50" style={{ boxShadow: 'var(--shadow-sm)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -24,20 +24,21 @@ export function Navbar({ onLoginClick, onSignupClick }: NavbarProps) {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
+          <div className="hidden md:flex items-center space-x-6">
+            <a href="#" className="text-foreground hover:text-primary transition-all duration-200 font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-200 hover:after:w-full">
               Home
             </a>
             <Button 
               variant="ghost" 
               onClick={onLoginClick}
-              className="text-foreground hover:text-primary hover:bg-primary/10"
+              className="text-foreground hover:text-primary hover:bg-primary/10 font-medium transition-all duration-200 focus-ring"
             >
               Login
             </Button>
             <Button 
               onClick={onSignupClick}
-              className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary shadow-md"
+              className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary font-medium transition-all duration-200 focus-ring"
+              style={{ boxShadow: 'var(--shadow-md)' }}
             >
               Sign Up
             </Button>

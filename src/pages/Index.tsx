@@ -55,28 +55,28 @@ const Index = () => {
 
                 {/* Feature highlights */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-3 p-4 bg-card rounded-lg shadow-sm border border-border">
+                  <div className="flex items-center space-x-3 p-5 bg-card rounded-xl border border-border/50 transition-all duration-200 hover:border-border" style={{ boxShadow: 'var(--shadow-sm)' }}>
                     <BookOpen className="h-8 w-8 text-primary" />
                     <div>
                       <h3 className="font-semibold text-foreground">Interactive Learning</h3>
                       <p className="text-sm text-muted-foreground">Engaging modules & quizzes</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3 p-4 bg-card rounded-lg shadow-sm border border-border">
+                  <div className="flex items-center space-x-3 p-5 bg-card rounded-xl border border-border/50 transition-all duration-200 hover:border-border" style={{ boxShadow: 'var(--shadow-sm)' }}>
                     <Award className="h-8 w-8 text-secondary" />
                     <div>
                       <h3 className="font-semibold text-foreground">Earn Badges</h3>
                       <p className="text-sm text-muted-foreground">Track your progress</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3 p-4 bg-card rounded-lg shadow-sm border border-border">
+                  <div className="flex items-center space-x-3 p-5 bg-card rounded-xl border border-border/50 transition-all duration-200 hover:border-border" style={{ boxShadow: 'var(--shadow-sm)' }}>
                     <Users className="h-8 w-8 text-accent" />
                     <div>
                       <h3 className="font-semibold text-foreground">Compete & Learn</h3>
                       <p className="text-sm text-muted-foreground">Join the leaderboard</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3 p-4 bg-card rounded-lg shadow-sm border border-border">
+                  <div className="flex items-center space-x-3 p-5 bg-card rounded-xl border border-border/50 transition-all duration-200 hover:border-border" style={{ boxShadow: 'var(--shadow-sm)' }}>
                     <Shield className="h-8 w-8 text-warning" />
                     <div>
                       <h3 className="font-semibold text-foreground">Life-Saving Skills</h3>
@@ -89,7 +89,8 @@ const Index = () => {
                   <Button 
                     onClick={handleSignupClick}
                     size="lg"
-                    className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary shadow-lg text-lg px-8"
+                    className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary font-semibold text-lg px-8 transition-all duration-200 focus-ring"
+                    style={{ boxShadow: 'var(--shadow-lg)' }}
                   >
                     Start Learning Today
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -98,7 +99,7 @@ const Index = () => {
                     onClick={handleLoginClick}
                     variant="outline" 
                     size="lg"
-                    className="border-primary text-primary hover:bg-primary hover:text-white text-lg px-8"
+                    className="border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold text-lg px-8 transition-all duration-200 focus-ring"
                   >
                     Sign In
                   </Button>
@@ -138,22 +139,23 @@ const Index = () => {
                 )}
 
                 {!showLoginForm && !showSignupForm && (
-                  <div className="text-center space-y-4 bg-card p-8 rounded-xl shadow-lg border border-border">
-                    <h3 className="text-2xl font-bold text-foreground mb-2">Ready to Begin?</h3>
-                    <p className="text-muted-foreground mb-6">
+                  <div className="text-center space-y-6 bg-card p-8 rounded-2xl border border-border/50 backdrop-blur-sm" style={{ boxShadow: 'var(--shadow-xl)' }}>
+                    <h3 className="text-2xl font-bold text-foreground">Ready to Begin?</h3>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
                       Join thousands of students learning essential safety skills
                     </p>
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       <Button 
                         onClick={handleSignupClick}
-                        className="w-full bg-gradient-to-r from-secondary to-secondary-light hover:from-secondary-dark hover:to-secondary shadow-md"
+                        className="w-full bg-gradient-to-r from-secondary to-secondary-light hover:from-secondary-dark hover:to-secondary font-semibold py-3 transition-all duration-200 focus-ring"
+                        style={{ boxShadow: 'var(--shadow-md)' }}
                       >
                         Create Account
                       </Button>
                       <Button 
                         onClick={handleLoginClick}
                         variant="outline"
-                        className="w-full border-border hover:bg-muted"
+                        className="w-full border-2 border-border hover:bg-muted font-medium py-3 transition-all duration-200 focus-ring"
                       >
                         Sign In
                       </Button>
