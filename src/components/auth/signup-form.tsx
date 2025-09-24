@@ -135,7 +135,7 @@ export function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps) {
           Already have an account?{" "}
           <Button 
             variant="link" 
-            className="text-primary hover:text-primary-dark p-0 font-semibold"
+            className="text-primary hover:text-primary-dark p-0 font-semibold h-auto text-sm"
             onClick={onSwitchToLogin}
             type="button"
           >
