@@ -4,6 +4,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { z } from "zod";
+
+const signupSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
 
 interface SignupFormProps {
   onClose: () => void;
@@ -19,14 +31,37 @@ export function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps) {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isLoading, setIsLoading] = useState(false);
+  const { signUp } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match!");
-      return;
+    
+    // Validate form
+    try {
+      signupSchema.parse(formData);
+      setErrors({});
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErrors: { [key: string]: string } = {};
+        error.issues.forEach((err) => {
+          if (err.path[0]) {
+            fieldErrors[err.path[0].toString()] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+        return;
+      }
     }
-    console.log("Signup attempt:", formData);
+
+    setIsLoading(true);
+    const { error } = await signUp(formData.email, formData.password, formData.name);
+    setIsLoading(false);
+    
+    if (!error) {
+      onClose();
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -55,6 +90,9 @@ export function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps) {
                 required
               />
             </div>
+            {errors.name && (
+              <p className="text-sm text-destructive">{errors.name}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -71,6 +109,9 @@ export function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps) {
                 required
               />
             </div>
+            {errors.email && (
+              <p className="text-sm text-destructive">{errors.email}</p>
+            )}
           </div>
           
           <div className="space-y-2">
@@ -96,6 +137,9 @@ export function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps) {
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
             </div>
+            {errors.password && (
+              <p className="text-sm text-destructive">{errors.password}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -121,13 +165,17 @@ export function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps) {
                 {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
             </div>
+            {errors.confirmPassword && (
+              <p className="text-sm text-destructive">{errors.confirmPassword}</p>
+            )}
           </div>
 
           <Button 
             type="submit" 
             className="w-full bg-gradient-to-r from-secondary to-secondary-light hover:from-secondary-dark hover:to-secondary shadow-md"
+            disabled={isLoading}
           >
-            Create Account
+            {isLoading ? "Creating Account..." : "Create Account"}
           </Button>
         </form>
 
