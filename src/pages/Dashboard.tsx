@@ -127,7 +127,7 @@ export default function Dashboard() {
           <Button 
             onClick={signOut}
             variant="outline"
-            className="border-white text-white hover:bg-white hover:text-primary font-medium"
+            className="border-white/80 text-white hover:bg-white hover:text-primary font-semibold shadow-lg"
           >
             <LogOut className="h-4 w-4 mr-2" />
             Logout

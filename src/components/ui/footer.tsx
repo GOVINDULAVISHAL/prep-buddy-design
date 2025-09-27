@@ -9,9 +9,9 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <img src={logo} alt="SafeLearn" className="h-8 w-8" />
+              <img src={logo} alt="Raksha" className="h-8 w-8" />
               <span className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                SafeLearn
+                Raksha
               </span>
             </div>
             <p className="text-muted-foreground text-sm">
@@ -79,7 +79,7 @@ export function Footer() {
 
         <div className="border-t border-border mt-8 pt-6 text-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 SafeLearn. All rights reserved. Stay safe, stay prepared.
+            © 2024 Raksha. All rights reserved. Stay safe, stay prepared.
           </p>
         </div>
       </div>

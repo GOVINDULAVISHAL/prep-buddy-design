@@ -28,7 +28,7 @@ export function Navbar({ onLoginClick, onSignupClick }: NavbarProps) {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img src={logo} alt="SafeLearn" className="h-10 w-10" />
+            <img src={logo} alt="Raksha" className="h-10 w-10" />
             <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               RAKSHA
             </span>

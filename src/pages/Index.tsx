@@ -44,12 +44,8 @@ const Index = () => {
               <div className="space-y-8">
                 <div className="space-y-4">
                   <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-                    Learn.{" "}
-                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                      Prepare.
-                    </span>{" "}
-                    <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
-                      Stay Safe.
+                    <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                      RAKSHA
                     </span>
                   </h1>
                   <p className="text-xl text-muted-foreground max-w-lg">
