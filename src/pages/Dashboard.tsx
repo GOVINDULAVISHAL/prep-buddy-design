@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -20,12 +20,16 @@ import {
   LogOut
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Dashboard() {
-  const { signOut } = useAuth();
-  const [user] = useState({
-    name: "Alex Johnson",
-    firstName: "Alex",
+  const { signOut, user } = useAuth();
+  const [userProfile, setUserProfile] = useState<{
+    full_name?: string;
+    firstName?: string;
+  } | null>(null);
+  
+  const [mockUserData] = useState({
     avatar: "",
     score: 2450,
     rank: 5,
@@ -33,6 +37,36 @@ export default function Dashboard() {
     streak: 7,
     level: "Intermediate"
   });
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (user) {
+        const { data } = await supabase
+          .from('profiles')
+          .select('full_name')
+          .eq('user_id', user.id)
+          .single();
+        
+        if (data?.full_name) {
+          const firstName = data.full_name.split(' ')[0];
+          setUserProfile({ 
+            full_name: data.full_name,
+            firstName 
+          });
+        } else {
+          // Fallback to user metadata
+          const fullName = user.user_metadata?.full_name;
+          const firstName = fullName ? fullName.split(' ')[0] : 'User';
+          setUserProfile({ 
+            full_name: fullName || 'User',
+            firstName 
+          });
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, [user]);
 
   const [modules] = useState([
     {
@@ -87,7 +121,7 @@ export default function Dashboard() {
       <div className="bg-gradient-to-r from-primary to-secondary p-6 text-white">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Welcome back, {user.firstName}!</h1>
+            <h1 className="text-3xl font-bold mb-2">Welcome back, {userProfile?.firstName || 'User'}!</h1>
             <p className="text-white/80">Ready to continue your safety journey?</p>
           </div>
           <Button 
@@ -109,39 +143,39 @@ export default function Dashboard() {
             <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardContent className="p-6 text-center">
                 <Avatar className="h-20 w-20 mx-auto mb-4 ring-4 ring-primary/20">
-                  <AvatarImage src={user.avatar} />
+                  <AvatarImage src={mockUserData.avatar} />
                   <AvatarFallback className="bg-gradient-to-r from-primary to-secondary text-white text-lg">
-                    {user.name.split(' ').map(n => n[0]).join('')}
+                    {userProfile?.full_name ? userProfile.full_name.split(' ').map(n => n[0]).join('') : 'U'}
                   </AvatarFallback>
                 </Avatar>
-                <h3 className="font-bold text-lg text-foreground">{user.name}</h3>
+                <h3 className="font-bold text-lg text-foreground">{userProfile?.full_name || 'User'}</h3>
                 <Badge variant="secondary" className="mb-4">
-                  {user.level}
+                  {mockUserData.level}
                 </Badge>
                 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Score</span>
-                    <span className="font-bold text-primary">{user.score.toLocaleString()}</span>
+                    <span className="font-bold text-primary">{mockUserData.score.toLocaleString()}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Rank</span>
                     <Badge variant="outline" className="font-bold">
-                      #{user.rank}
+                      #{mockUserData.rank}
                     </Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Badges</span>
                     <div className="flex items-center space-x-1">
                       <Award className="h-4 w-4 text-accent" />
-                      <span className="font-bold">{user.badges}</span>
+                      <span className="font-bold">{mockUserData.badges}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Streak</span>
                     <div className="flex items-center space-x-1">
                       <Zap className="h-4 w-4 text-accent" />
-                      <span className="font-bold">{user.streak} days</span>
+                      <span className="font-bold">{mockUserData.streak} days</span>
                     </div>
                   </div>
                 </div>
