@@ -71,7 +71,7 @@ export function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps) {
   return (
     <Card className="w-full max-w-md mx-auto shadow-lg border-0 bg-card">
       <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-2xl font-bold text-foreground">Join SafeLearn</CardTitle>
+        <CardTitle className="text-2xl font-bold text-foreground">Join Raksha</CardTitle>
         <p className="text-muted-foreground">Start your disaster preparedness journey</p>
       </CardHeader>
       <CardContent className="space-y-4">

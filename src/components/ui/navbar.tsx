@@ -30,7 +30,7 @@ export function Navbar({ onLoginClick, onSignupClick }: NavbarProps) {
           <Link to="/" className="flex items-center space-x-3">
             <img src={logo} alt="SafeLearn" className="h-10 w-10" />
             <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              SafeLearn
+              RAKSHA
             </span>
           </Link>
 

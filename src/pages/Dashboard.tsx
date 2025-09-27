@@ -16,10 +16,13 @@ import {
   Wind,
   Award,
   Star,
-  TrendingUp
+  TrendingUp,
+  LogOut
 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Dashboard() {
+  const { signOut } = useAuth();
   const [user] = useState({
     name: "Alex Johnson",
     avatar: "",
@@ -81,9 +84,19 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-gradient-to-r from-primary to-secondary p-6 text-white">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-2">Welcome back, {user.name}!</h1>
-          <p className="text-white/80">Ready to continue your safety journey?</p>
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Welcome back, {user.name}!</h1>
+            <p className="text-white/80">Ready to continue your safety journey?</p>
+          </div>
+          <Button 
+            onClick={signOut}
+            variant="outline"
+            className="border-white/20 text-white hover:bg-white/10 hover:text-white"
+          >
+            <LogOut className="h-4 w-4 mr-2" />
+            Logout
+          </Button>
         </div>
       </div>
 
