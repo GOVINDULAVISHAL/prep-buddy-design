@@ -5,7 +5,10 @@ import { SignupForm } from "@/components/auth/signup-form";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function Auth() {
-  const [showSignup, setShowSignup] = useState(false);
+  const [showSignup, setShowSignup] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('mode') === 'signup';
+  });
   const { user, loading } = useAuth();
 
   // Redirect authenticated users to dashboard

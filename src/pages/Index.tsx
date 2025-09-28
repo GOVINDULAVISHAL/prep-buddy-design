@@ -28,7 +28,7 @@ const Index = () => {
   };
 
   const handleSignupClick = () => {
-    window.location.href = '/auth';
+    window.location.href = '/auth?mode=signup';
   };
 
   return (
