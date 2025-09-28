@@ -1,72 +1,90 @@
-import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { 
+  BookOpen, 
   Trophy, 
   Target, 
-  Users, 
-  Brain, 
-  Zap, 
-  Mountain, 
-  Droplets, 
-  Flame, 
+  Clock, 
+  LogOut, 
+  Play,
+  Settings,
+  User,
+  Mountain,
+  Droplets,
+  Flame,
   Wind,
   Award,
   Star,
   TrendingUp,
-  LogOut
+  Brain,
+  Zap
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { ProfileModal } from "@/components/ProfileModal";
+import { QuizModal } from "@/components/QuizModal";
 
-export default function Dashboard() {
-  const { signOut, user } = useAuth();
-  const [userProfile, setUserProfile] = useState<{
-    full_name?: string;
-    firstName?: string;
-  } | null>(null);
-  
-  const [mockUserData] = useState({
-    avatar: "",
-    score: 2450,
-    rank: 5,
-    badges: 12,
-    streak: 7,
-    level: "Intermediate"
-  });
+const Dashboard = () => {
+  const { user, signOut, loading } = useAuth();
+  const [userProfile, setUserProfile] = useState<any>(null);
+  const [profileLoading, setProfileLoading] = useState(true);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showQuizModal, setShowQuizModal] = useState(false);
+
+  const fetchUserProfile = async () => {
+    if (!user) return;
+    
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+      
+      if (error) {
+        console.error('Error fetching profile:', error);
+        return;
+      }
+      
+      setUserProfile(data);
+    } catch (error) {
+      console.error('Error in fetchUserProfile:', error);
+    } finally {
+      setProfileLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (user) {
-        const { data } = await supabase
-          .from('profiles')
-          .select('full_name')
-          .eq('user_id', user.id)
-          .single();
-        
-        if (data?.full_name) {
-          const firstName = data.full_name.split(' ')[0];
-          setUserProfile({ 
-            full_name: data.full_name,
-            firstName 
-          });
-        } else {
-          // Fallback to user metadata
-          const fullName = user.user_metadata?.full_name;
-          const firstName = fullName ? fullName.split(' ')[0] : 'User';
-          setUserProfile({ 
-            full_name: fullName || 'User',
-            firstName 
-          });
-        }
-      }
-    };
-
     fetchUserProfile();
   }, [user]);
+
+  const getInitials = (name: string) => {
+    if (!name) return 'U';
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  // Redirect to login if not authenticated
+  if (loading || profileLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
 
   const [modules] = useState([
     {
@@ -107,31 +125,58 @@ export default function Dashboard() {
     }
   ]);
 
-  const [leaderboard] = useState([
-    { id: 1, name: "Sarah Chen", score: 3200, avatar: "" },
-    { id: 2, name: "Marcus Rodriguez", score: 2980, avatar: "" },
-    { id: 3, name: "Emma Thompson", score: 2750, avatar: "" },
-    { id: 4, name: "David Kim", score: 2650, avatar: "" },
-    { id: 5, name: "Alex Johnson", score: 2450, avatar: "", isCurrentUser: true }
-  ]);
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-gradient-to-r from-primary to-secondary p-6 text-white">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">Welcome back, {userProfile?.firstName || 'User'}!</h1>
-            <p className="text-white/80">Ready to continue your safety journey?</p>
+        <div className="max-w-7xl mx-auto">
+          {/* User Profile Section */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="relative group">
+                <Avatar 
+                  className="h-16 w-16 cursor-pointer transition-all duration-200 group-hover:ring-4 group-hover:ring-primary/20" 
+                  onClick={() => setShowProfileModal(true)}
+                >
+                  <AvatarImage src={userProfile?.avatar_url} />
+                  <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white text-lg">
+                    {userProfile?.full_name ? getInitials(userProfile.full_name) : 'U'}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="absolute -top-1 -right-1 bg-primary rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Settings className="h-3 w-3 text-white" />
+                </div>
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-white">
+                  Welcome, {userProfile?.full_name ? userProfile.full_name.split(' ')[0] : 'Student'}!
+                </h2>
+                <div className="flex items-center space-x-2 mt-1">
+                  <Badge 
+                    variant="secondary" 
+                    className="bg-white/20 text-white border-white/30"
+                  >
+                    Level {userProfile?.level || 1}
+                  </Badge>
+                  <Badge 
+                    variant="outline" 
+                    className="border-white/50 text-white"
+                  >
+                    Intermediate
+                  </Badge>
+                </div>
+              </div>
+            </div>
+
+            <Button 
+              onClick={signOut}
+              variant="outline"
+              className="border-white/90 bg-white/10 text-white hover:bg-white hover:text-primary font-semibold shadow-lg backdrop-blur-sm transition-all duration-200"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              <span className="text-sm font-semibold">Logout</span>
+            </Button>
           </div>
-          <Button 
-            onClick={signOut}
-            variant="outline"
-            className="border-white/90 bg-white/10 text-white hover:bg-white hover:text-primary font-semibold shadow-lg backdrop-blur-sm transition-all duration-200"
-          >
-            <LogOut className="h-4 w-4 mr-2" />
-            <span className="text-sm font-semibold">Logout</span>
-          </Button>
         </div>
       </div>
 
@@ -142,40 +187,37 @@ export default function Dashboard() {
             {/* User Profile Card */}
             <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardContent className="p-6 text-center">
-                <Avatar className="h-20 w-20 mx-auto mb-4 ring-4 ring-primary/20">
-                  <AvatarImage src={mockUserData.avatar} />
+                <Avatar 
+                  className="h-20 w-20 mx-auto mb-4 ring-4 ring-primary/20 cursor-pointer"
+                  onClick={() => setShowProfileModal(true)}
+                >
+                  <AvatarImage src={userProfile?.avatar_url} />
                   <AvatarFallback className="bg-gradient-to-r from-primary to-secondary text-white text-lg">
-                    {userProfile?.full_name ? userProfile.full_name.split(' ').map(n => n[0]).join('') : 'U'}
+                    {userProfile?.full_name ? getInitials(userProfile.full_name) : 'U'}
                   </AvatarFallback>
                 </Avatar>
                 <h3 className="font-bold text-lg text-foreground">{userProfile?.full_name || 'User'}</h3>
                 <Badge variant="secondary" className="mb-4">
-                  {mockUserData.level}
+                  Intermediate
                 </Badge>
                 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Score</span>
-                    <span className="font-bold text-primary">{mockUserData.score.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground text-sm">Rank</span>
-                    <Badge variant="outline" className="font-bold">
-                      #{mockUserData.rank}
-                    </Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground text-sm">Badges</span>
-                    <div className="flex items-center space-x-1">
-                      <Award className="h-4 w-4 text-accent" />
-                      <span className="font-bold">{mockUserData.badges}</span>
-                    </div>
+                    <span className="font-bold text-primary">{userProfile?.score || 0}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Streak</span>
                     <div className="flex items-center space-x-1">
                       <Zap className="h-4 w-4 text-accent" />
-                      <span className="font-bold">{mockUserData.streak} days</span>
+                      <span className="font-bold">{userProfile?.streak || 0} days</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-sm">Badges</span>
+                    <div className="flex items-center space-x-1">
+                      <Award className="h-4 w-4 text-accent" />
+                      <span className="font-bold">{userProfile?.badges?.length || 0}</span>
                     </div>
                   </div>
                 </div>
@@ -220,9 +262,9 @@ export default function Dashboard() {
               <CardContent>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
                   <div>
-                    <h3 className="font-semibold text-lg mb-2">Earthquake Emergency Procedures</h3>
+                    <h3 className="font-semibold text-lg mb-2">Emergency Preparedness Quiz</h3>
                     <p className="text-muted-foreground mb-4">
-                      Test your knowledge about what to do during an earthquake. Complete today's quiz to maintain your streak!
+                      Test your knowledge about disaster preparedness and safety procedures. Complete today's quiz to maintain your streak!
                     </p>
                     <div className="flex items-center space-x-4">
                       <Badge variant="outline" className="bg-warning/10 text-warning border-warning/20">
@@ -233,7 +275,11 @@ export default function Dashboard() {
                       </Badge>
                     </div>
                   </div>
-                  <Button className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary shadow-md">
+                  <Button 
+                    className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary shadow-md"
+                    onClick={() => setShowQuizModal(true)}
+                  >
+                    <Play className="mr-2 h-5 w-5" />
                     Start Quiz
                   </Button>
                 </div>
@@ -244,7 +290,7 @@ export default function Dashboard() {
             <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardHeader>
                 <CardTitle className="text-xl flex items-center space-x-2">
-                  <Target className="h-6 w-6 text-secondary" />
+                  <BookOpen className="h-6 w-6 text-secondary" />
                   <span>Learning Modules</span>
                 </CardTitle>
               </CardHeader>
@@ -253,7 +299,7 @@ export default function Dashboard() {
                   {modules.map((module) => {
                     const IconComponent = module.icon;
                     return (
-                      <Card key={module.id} className="border border-border/50 rounded-xl cursor-pointer transition-all duration-200 hover:border-border" style={{ boxShadow: 'var(--shadow-sm)' }} onMouseEnter={(e) => e.currentTarget.style.boxShadow = 'var(--shadow-md)'} onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'var(--shadow-sm)'}>
+                      <Card key={module.id} className="border border-border/50 rounded-xl cursor-pointer transition-all duration-200 hover:border-border hover:shadow-md">
                         <CardContent className="p-4">
                           <div className="flex items-center space-x-3 mb-3">
                             <div className={`p-2 rounded-lg ${module.color}`}>
@@ -282,62 +328,24 @@ export default function Dashboard() {
                 </div>
               </CardContent>
             </Card>
-
-            {/* Leaderboard */}
-            <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
-              <CardHeader>
-                <CardTitle className="text-xl flex items-center space-x-2">
-                  <Trophy className="h-6 w-6 text-accent" />
-                  <span>Leaderboard</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {leaderboard.map((student, index) => (
-                    <div 
-                      key={student.id} 
-                      className={`flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                        student.isCurrentUser 
-                          ? 'bg-primary/10 border border-primary/20' 
-                          : 'hover:bg-muted/50'
-                      }`}
-                    >
-                      <div className="flex items-center justify-center w-8 h-8">
-                        {index < 3 ? (
-                          <div className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold ${
-                            index === 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' :
-                            index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
-                            'bg-gradient-to-r from-yellow-600 to-yellow-700'
-                          }`}>
-                            {index + 1}
-                          </div>
-                        ) : (
-                          <span className="text-muted-foreground font-medium">#{index + 1}</span>
-                        )}
-                      </div>
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage src={student.avatar} />
-                        <AvatarFallback className="text-xs">
-                          {student.name.split(' ').map(n => n[0]).join('')}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1">
-                        <p className={`font-medium ${student.isCurrentUser ? 'text-primary' : 'text-foreground'}`}>
-                          {student.name} {student.isCurrentUser && '(You)'}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-bold text-foreground">{student.score.toLocaleString()}</p>
-                        <p className="text-xs text-muted-foreground">points</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>
+
+      {/* Modals */}
+      <ProfileModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
+        userProfile={userProfile}
+        onProfileUpdate={fetchUserProfile}
+      />
+      
+      <QuizModal
+        isOpen={showQuizModal}
+        onClose={() => setShowQuizModal(false)}
+      />
     </div>
   );
-}
+};
+
+export default Dashboard;
