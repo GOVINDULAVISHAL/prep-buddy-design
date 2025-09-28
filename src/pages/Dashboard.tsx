@@ -127,10 +127,10 @@ export default function Dashboard() {
           <Button 
             onClick={signOut}
             variant="outline"
-            className="border-white/80 text-white hover:bg-white hover:text-primary font-semibold shadow-lg"
+            className="border-white/90 bg-white/10 text-white hover:bg-white hover:text-primary font-semibold shadow-lg backdrop-blur-sm transition-all duration-200"
           >
             <LogOut className="h-4 w-4 mr-2" />
-            Logout
+            <span className="text-sm font-semibold">Logout</span>
           </Button>
         </div>
       </div>
