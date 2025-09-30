@@ -22,7 +22,8 @@ export function LoginForm({ onClose, onSwitchToSignup }: LoginFormProps) {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn } = useAuth();
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const { signIn, signInWithGoogle } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +47,16 @@ export function LoginForm({ onClose, onSwitchToSignup }: LoginFormProps) {
     setIsLoading(true);
     const { error } = await signIn(email, password);
     setIsLoading(false);
+    
+    if (!error) {
+      onClose();
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsGoogleLoading(true);
+    const { error } = await signInWithGoogle();
+    setIsGoogleLoading(false);
     
     if (!error) {
       onClose();
@@ -120,9 +131,11 @@ export function LoginForm({ onClose, onSwitchToSignup }: LoginFormProps) {
           variant="outline" 
           className="w-full border-border hover:bg-muted"
           type="button"
+          onClick={handleGoogleSignIn}
+          disabled={isGoogleLoading}
         >
           <Chrome className="mr-2 h-4 w-4" />
-          Sign in with Google
+          {isGoogleLoading ? "Connecting..." : "Sign in with Google"}
         </Button>
 
         <div className="text-center space-y-2">
