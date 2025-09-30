@@ -9,69 +9,93 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Background & Surface */
-    --background: 210 25% 98%;
-    --foreground: 215 25% 15%;
+    /* Background & Surface - Enhanced with subtle gradients */
+    --background: 220 30% 97%;
+    --foreground: 230 15% 12%;
     
-    /* Cards & Surfaces */
+    /* Cards & Surfaces with soft gradients */
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 230 15% 12%;
     
     /* Popovers */
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 230 15% 12%;
     
-    /* Primary - Ocean Blue */
-    --primary: 210 85% 55%;
+    /* Primary - Vibrant Ocean Blue */
+    --primary: 220 100% 60%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 210 85% 65%;
-    --primary-dark: 210 85% 45%;
+    --primary-light: 220 100% 70%;
+    --primary-dark: 220 100% 50%;
+    --primary-glow: 220 100% 80%;
     
-    /* Secondary - Forest Green */
-    --secondary: 150 70% 45%;
+    /* Secondary - Vibrant Emerald Green */
+    --secondary: 160 85% 50%;
     --secondary-foreground: 0 0% 100%;
-    --secondary-light: 150 70% 55%;
-    --secondary-dark: 150 70% 35%;
+    --secondary-light: 160 85% 60%;
+    --secondary-dark: 160 85% 40%;
+    --secondary-glow: 160 85% 70%;
     
-    /* Accent - Safety Orange */
-    --accent: 25 95% 60%;
+    /* Accent - Electric Purple */
+    --accent: 280 100% 65%;
     --accent-foreground: 0 0% 100%;
-    --accent-light: 25 95% 70%;
-    --accent-dark: 25 95% 50%;
+    --accent-light: 280 100% 75%;
+    --accent-dark: 280 100% 55%;
+    --accent-glow: 280 100% 85%;
     
-    /* Success - Emerald */
-    --success: 145 85% 45%;
+    /* Tertiary - Sunset Orange */
+    --tertiary: 25 100% 65%;
+    --tertiary-foreground: 0 0% 100%;
+    --tertiary-light: 25 100% 75%;
+    --tertiary-dark: 25 100% 55%;
+    
+    /* Success - Vibrant Green */
+    --success: 140 100% 50%;
     --success-foreground: 0 0% 100%;
     
-    /* Warning - Amber */
-    --warning: 45 95% 55%;
+    /* Warning - Golden Yellow */
+    --warning: 50 100% 60%;
     --warning-foreground: 0 0% 15%;
     
-    /* Destructive - Red */
-    --destructive: 0 85% 60%;
+    /* Destructive - Bright Red */
+    --destructive: 5 100% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Muted elements */
-    --muted: 210 20% 95%;
-    --muted-foreground: 215 15% 55%;
+    /* Info - Sky Blue */
+    --info: 200 100% 60%;
+    --info-foreground: 0 0% 100%;
     
-    /* Borders & Inputs */
-    --border: 210 20% 90%;
-    --input: 210 20% 95%;
-    --ring: 210 85% 55%;
+    /* Muted elements with subtle color */
+    --muted: 220 25% 94%;
+    --muted-foreground: 230 15% 45%;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    /* Borders & Inputs with subtle color */
+    --border: 220 25% 88%;
+    --input: 220 25% 96%;
+    --ring: 220 100% 60%;
     
-    /* Professional Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    /* Vibrant Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    --gradient-tertiary: linear-gradient(135deg, hsl(var(--tertiary)), hsl(var(--tertiary-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-rainbow: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)), hsl(var(--tertiary)));
+    --gradient-sunset: linear-gradient(135deg, hsl(var(--tertiary)), hsl(var(--accent)));
+    --gradient-ocean: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--info)));
+    --gradient-forest: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--success)));
+    
+    /* Animated gradients */
+    --gradient-animated: linear-gradient(-45deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)), hsl(var(--tertiary)));
+    
+    /* Enhanced Shadows with color */
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.3);
+    --shadow-glow-accent: 0 0 20px hsl(var(--accent) / 0.3);
+    --shadow-glow-secondary: 0 0 20px hsl(var(--secondary) / 0.3);
     
     /* Professional spacing */
     --spacing-xs: 0.25rem;
@@ -81,7 +105,7 @@ All colors MUST be HSL.
     --spacing-xl: 2rem;
     --spacing-2xl: 3rem;
     
-    /* Border radius for soft, modern look */
+    /* Border radius for modern look */
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
@@ -169,7 +193,7 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  /* Professional card shadows */
+  /* Enhanced card shadows with glow effects */
   .card-elevated {
     box-shadow: var(--shadow-lg);
   }
@@ -178,13 +202,86 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-xl);
   }
   
-  /* Professional gradients for enhanced depth */
-  .gradient-professional {
-    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+  .card-glow {
+    box-shadow: var(--shadow-glow);
   }
   
-  /* Enhanced focus states */
+  .card-glow-accent {
+    box-shadow: var(--shadow-glow-accent);
+  }
+  
+  .card-glow-secondary {
+    box-shadow: var(--shadow-glow-secondary);
+  }
+  
+  /* Vibrant gradients for enhanced visual appeal */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-rainbow {
+    background: var(--gradient-rainbow);
+  }
+  
+  .gradient-sunset {
+    background: var(--gradient-sunset);
+  }
+  
+  .gradient-ocean {
+    background: var(--gradient-ocean);
+  }
+  
+  .gradient-forest {
+    background: var(--gradient-forest);
+  }
+  
+  .gradient-animated {
+    background: var(--gradient-animated);
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease infinite;
+  }
+  
+  /* Animated gradient keyframe */
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Enhanced focus states with colorful rings */
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+  
+  /* Hover effects with scale and glow */
+  .hover-glow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-glow:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Glass morphism effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Colorful text effects */
+  .text-gradient {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-rainbow {
+    background: var(--gradient-rainbow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

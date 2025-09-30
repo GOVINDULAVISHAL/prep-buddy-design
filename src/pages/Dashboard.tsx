@@ -116,8 +116,8 @@ const Dashboard = () => {
   // Redirect to login if not authenticated
   if (loading || profileLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      <div className="min-h-screen flex items-center justify-center gradient-animated">
+        <div className="animate-pulse-glow rounded-full h-32 w-32 border-4 border-primary bg-primary/20"></div>
       </div>
     );
   }
@@ -130,8 +130,9 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-r from-primary to-secondary p-6 text-white">
-        <div className="max-w-7xl mx-auto">
+      <div className="gradient-hero p-6 text-white relative overflow-hidden">
+        <div className="absolute inset-0 gradient-animated opacity-30"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* User Profile Section */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -187,14 +188,14 @@ const Dashboard = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
             {/* User Profile Card */}
-            <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
+            <Card className="border border-border/50 rounded-2xl hover-glow card-glow" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardContent className="p-6 text-center">
                 <Avatar 
                   className="h-20 w-20 mx-auto mb-4 ring-4 ring-primary/20 cursor-pointer"
                   onClick={() => setShowProfileModal(true)}
                 >
                   <AvatarImage src={userProfile?.avatar_url} />
-                  <AvatarFallback className="bg-gradient-to-r from-primary to-secondary text-white text-lg">
+                  <AvatarFallback className="gradient-sunset text-white text-lg">
                     {userProfile?.full_name ? getInitials(userProfile.full_name) : 'U'}
                   </AvatarFallback>
                 </Avatar>
@@ -206,20 +207,20 @@ const Dashboard = () => {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Score</span>
-                    <span className="font-bold text-primary">{userProfile?.score || 0}</span>
+                    <span className="font-bold text-primary text-gradient">{userProfile?.score || 0}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Streak</span>
                     <div className="flex items-center space-x-1">
-                      <Zap className="h-4 w-4 text-accent" />
-                      <span className="font-bold">{userProfile?.streak || 0} days</span>
+                      <Zap className="h-4 w-4 text-accent animate-pulse-glow" />
+                      <span className="font-bold text-accent">{userProfile?.streak || 0} days</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-sm">Badges</span>
                     <div className="flex items-center space-x-1">
-                      <Award className="h-4 w-4 text-accent" />
-                      <span className="font-bold">{userProfile?.badges?.length || 0}</span>
+                      <Award className="h-4 w-4 text-tertiary" />
+                      <span className="font-bold text-tertiary">{userProfile?.badges?.length || 0}</span>
                     </div>
                   </div>
                 </div>
@@ -227,11 +228,11 @@ const Dashboard = () => {
             </Card>
 
             {/* Quick Stats */}
-            <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
+            <Card className="border border-border/50 rounded-2xl hover-glow card-glow-secondary" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center space-x-2">
-                  <TrendingUp className="h-5 w-5 text-primary" />
-                  <span>This Week</span>
+                  <TrendingUp className="h-5 w-5 text-secondary animate-pulse" />
+                  <span className="text-gradient">This Week</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -245,7 +246,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Accuracy</span>
-                  <span className="font-bold text-primary">87%</span>
+                  <span className="font-bold text-primary text-gradient">87%</span>
                 </div>
               </CardContent>
             </Card>
@@ -254,11 +255,11 @@ const Dashboard = () => {
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-6">
             {/* Daily Quiz Section */}
-            <Card className="border border-border/50 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
+            <Card className="border border-border/50 gradient-ocean/5 rounded-2xl hover-glow card-glow-accent animate-fade-in" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardHeader>
                 <CardTitle className="text-xl flex items-center space-x-2">
-                  <Brain className="h-6 w-6 text-primary" />
-                  <span>Today's Safety Challenge</span>
+                  <Brain className="h-6 w-6 text-accent animate-pulse" />
+                  <span className="text-rainbow">Today's Safety Challenge</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -269,16 +270,16 @@ const Dashboard = () => {
                       Test your knowledge about disaster preparedness and safety procedures. Complete today's quiz to maintain your streak!
                     </p>
                     <div className="flex items-center space-x-4">
-                      <Badge variant="outline" className="bg-warning/10 text-warning border-warning/20">
+                      <Badge variant="outline" className="bg-tertiary/20 text-tertiary border-tertiary/30 hover-glow">
                         5 Questions
                       </Badge>
-                      <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+                      <Badge variant="outline" className="bg-success/20 text-success border-success/30 hover-glow">
                         +50 Points
                       </Badge>
                     </div>
                   </div>
                   <Button 
-                    className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary shadow-md"
+                    className="gradient-sunset hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-glow"
                     onClick={() => setShowQuizModal(true)}
                   >
                     <Play className="mr-2 h-5 w-5" />
@@ -289,11 +290,11 @@ const Dashboard = () => {
             </Card>
 
             {/* Learning Modules */}
-            <Card className="border border-border/50 rounded-2xl" style={{ boxShadow: 'var(--shadow-lg)' }}>
+            <Card className="border border-border/50 rounded-2xl hover-glow" style={{ boxShadow: 'var(--shadow-lg)' }}>
               <CardHeader>
                 <CardTitle className="text-xl flex items-center space-x-2">
-                  <BookOpen className="h-6 w-6 text-secondary" />
-                  <span>Learning Modules</span>
+                  <BookOpen className="h-6 w-6 text-secondary animate-pulse" />
+                  <span className="text-gradient">Learning Modules</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -301,7 +302,7 @@ const Dashboard = () => {
                   {modules.map((module) => {
                     const IconComponent = module.icon;
                     return (
-                      <Card key={module.id} className="border border-border/50 rounded-xl cursor-pointer transition-all duration-200 hover:border-border hover:shadow-md">
+                      <Card key={module.id} className="border border-border/50 rounded-xl cursor-pointer transition-all duration-200 hover:border-border hover:shadow-md hover-glow animate-scale-in">
                         <CardContent className="p-4">
                           <div className="flex items-center space-x-3 mb-3">
                             <div className={`p-2 rounded-lg ${module.color}`}>
