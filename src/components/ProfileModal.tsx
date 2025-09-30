@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,11 +23,18 @@ export const ProfileModal = ({ isOpen, onClose, userProfile, onProfileUpdate }: 
   
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: userProfile?.full_name || "",
+    fullName: "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: ""
   });
+
+  // Update form data when userProfile changes
+  useEffect(() => {
+    if (userProfile?.full_name) {
+      setFormData(prev => ({ ...prev, fullName: userProfile.full_name }));
+    }
+  }, [userProfile?.full_name]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
