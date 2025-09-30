@@ -36,6 +36,46 @@ const Dashboard = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
 
+  // All useState hooks must be called before any conditional returns
+  const [modules] = useState([
+    {
+      id: 1,
+      name: "Earthquake",
+      icon: Mountain,
+      progress: 85,
+      color: "bg-gradient-to-r from-primary to-primary-light",
+      completed: 17,
+      total: 20
+    },
+    {
+      id: 2,
+      name: "Flood",
+      icon: Droplets,
+      progress: 60,
+      color: "bg-gradient-to-r from-secondary to-secondary-light",
+      completed: 12,
+      total: 20
+    },
+    {
+      id: 3,
+      name: "Fire",
+      icon: Flame,
+      progress: 40,
+      color: "bg-gradient-to-r from-accent to-accent-light",
+      completed: 8,
+      total: 20
+    },
+    {
+      id: 4,
+      name: "Cyclone",
+      icon: Wind,
+      progress: 25,
+      color: "bg-gradient-to-r from-warning to-warning",
+      completed: 5,
+      total: 20
+    }
+  ]);
+
   const fetchUserProfile = async () => {
     if (!user) return;
     
@@ -86,44 +126,6 @@ const Dashboard = () => {
     return <Navigate to="/auth" replace />;
   }
 
-  const [modules] = useState([
-    {
-      id: 1,
-      name: "Earthquake",
-      icon: Mountain,
-      progress: 85,
-      color: "bg-gradient-to-r from-primary to-primary-light",
-      completed: 17,
-      total: 20
-    },
-    {
-      id: 2,
-      name: "Flood",
-      icon: Droplets,
-      progress: 60,
-      color: "bg-gradient-to-r from-secondary to-secondary-light",
-      completed: 12,
-      total: 20
-    },
-    {
-      id: 3,
-      name: "Fire",
-      icon: Flame,
-      progress: 40,
-      color: "bg-gradient-to-r from-accent to-accent-light",
-      completed: 8,
-      total: 20
-    },
-    {
-      id: 4,
-      name: "Cyclone",
-      icon: Wind,
-      progress: 25,
-      color: "bg-gradient-to-r from-warning to-warning",
-      completed: 5,
-      total: 20
-    }
-  ]);
 
   return (
     <div className="min-h-screen bg-background">
