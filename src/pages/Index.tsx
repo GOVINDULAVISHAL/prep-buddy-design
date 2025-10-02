@@ -44,12 +44,12 @@ const Index = () => {
               {/* Left side - Hero content */}
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
+                  <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                     <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                       RAKSHA
                     </span>
                   </h1>
-                  <p className="text-xl text-muted-foreground max-w-lg">
+                  <p className="text-xl text-gray-700 dark:text-gray-200 max-w-lg font-medium">
                     Master disaster preparedness through interactive learning, gamified challenges, and expert guidance.
                   </p>
                 </div>
@@ -58,19 +58,19 @@ const Index = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex items-center space-x-3 backdrop-blur-sm bg-gradient-to-br from-primary/20 to-primary/5 p-4 rounded-xl border-2 border-primary/30 hover:border-primary/50 transition-all hover:scale-105 shadow-lg card-glow">
                     <BookOpen className="h-6 w-6 text-primary animate-pulse" />
-                    <span className="text-sm font-medium text-foreground">Interactive Modules</span>
+                    <span className="text-sm font-medium text-gray-800 dark:text-gray-100">Interactive Modules</span>
                   </div>
                   <div className="flex items-center space-x-3 backdrop-blur-sm bg-gradient-to-br from-secondary/20 to-secondary/5 p-4 rounded-xl border-2 border-secondary/30 hover:border-secondary/50 transition-all hover:scale-105 shadow-lg card-glow-secondary">
                     <Shield className="h-6 w-6 text-secondary animate-pulse" />
-                    <span className="text-sm font-medium text-foreground">Safety Certified</span>
+                    <span className="text-sm font-medium text-gray-800 dark:text-gray-100">Safety Certified</span>
                   </div>
                   <div className="flex items-center space-x-3 backdrop-blur-sm bg-gradient-to-br from-accent/20 to-accent/5 p-4 rounded-xl border-2 border-accent/30 hover:border-accent/50 transition-all hover:scale-105 shadow-lg card-glow-accent">
                     <Users className="h-6 w-6 text-accent animate-pulse" />
-                    <span className="text-sm font-medium text-foreground">Community Learning</span>
+                    <span className="text-sm font-medium text-gray-800 dark:text-gray-100">Community Learning</span>
                   </div>
                   <div className="flex items-center space-x-3 backdrop-blur-sm bg-gradient-to-br from-tertiary/20 to-tertiary/5 p-4 rounded-xl border-2 border-tertiary/30 hover:border-tertiary/50 transition-all hover:scale-105 shadow-lg">
                     <Award className="h-6 w-6 text-tertiary animate-pulse" />
-                    <span className="text-sm font-medium text-foreground">Achievement System</span>
+                    <span className="text-sm font-medium text-gray-800 dark:text-gray-100">Achievement System</span>
                   </div>
                 </div>
 
@@ -97,7 +97,7 @@ const Index = () => {
               <div className="flex justify-center lg:justify-end">
                 <div className="text-center space-y-6 backdrop-blur-md bg-gradient-to-br from-card/90 to-card/70 p-10 rounded-3xl border-2 border-primary/30 shadow-2xl card-glow-accent hover:scale-105 transition-all">
                   <h3 className="text-3xl font-bold text-gradient">Ready to Begin?</h3>
-                  <p className="text-muted-foreground text-lg leading-relaxed">
+                  <p className="text-gray-700 dark:text-gray-200 text-lg leading-relaxed font-medium">
                     Join thousands of students learning essential safety skills
                   </p>
                   <div className="space-y-4">
@@ -128,26 +128,26 @@ const Index = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-rainbow mb-4">Making Safety Education Accessible</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              <p className="text-gray-700 dark:text-gray-200 max-w-2xl mx-auto text-lg font-medium">
                 Join our growing community of prepared students and educators building safer communities together.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="text-center backdrop-blur-sm bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-2xl border-2 border-primary/20 hover:border-primary/40 transition-all hover:scale-105 card-glow">
                 <div className="text-5xl font-bold text-primary mb-2 animate-pulse">50K+</div>
-                <div className="text-muted-foreground font-medium">Students Trained</div>
+                <div className="text-gray-700 dark:text-gray-200 font-semibold">Students Trained</div>
               </div>
               <div className="text-center backdrop-blur-sm bg-gradient-to-br from-secondary/10 to-secondary/5 p-6 rounded-2xl border-2 border-secondary/20 hover:border-secondary/40 transition-all hover:scale-105 card-glow-secondary">
                 <div className="text-5xl font-bold text-secondary mb-2 animate-pulse">95%</div>
-                <div className="text-muted-foreground font-medium">Course Completion</div>
+                <div className="text-gray-700 dark:text-gray-200 font-semibold">Course Completion</div>
               </div>
               <div className="text-center backdrop-blur-sm bg-gradient-to-br from-accent/10 to-accent/5 p-6 rounded-2xl border-2 border-accent/20 hover:border-accent/40 transition-all hover:scale-105 card-glow-accent">
                 <div className="text-5xl font-bold text-accent mb-2 animate-pulse">4.9★</div>
-                <div className="text-muted-foreground font-medium">Student Rating</div>
+                <div className="text-gray-700 dark:text-gray-200 font-semibold">Student Rating</div>
               </div>
               <div className="text-center backdrop-blur-sm bg-gradient-to-br from-tertiary/10 to-tertiary/5 p-6 rounded-2xl border-2 border-tertiary/20 hover:border-tertiary/40 transition-all hover:scale-105">
                 <div className="text-5xl font-bold text-tertiary mb-2 animate-pulse">24/7</div>
-                <div className="text-muted-foreground font-medium">Available Learning</div>
+                <div className="text-gray-700 dark:text-gray-200 font-semibold">Available Learning</div>
               </div>
             </div>
           </div>
