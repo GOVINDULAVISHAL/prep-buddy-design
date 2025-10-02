@@ -37,8 +37,9 @@ const Index = () => {
       
       {/* Hero Section */}
       <main className="flex-1">
-        <div className="relative bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative gradient-animated py-20 overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/30 via-secondary/20 to-accent/30 opacity-40"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left side - Hero content */}
               <div className="space-y-8">
@@ -55,20 +56,20 @@ const Index = () => {
 
                 {/* Feature highlights */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-3 bg-card/50 p-4 rounded-lg border border-border/30">
-                    <BookOpen className="h-6 w-6 text-primary" />
+                  <div className="flex items-center space-x-3 backdrop-blur-sm bg-gradient-to-br from-primary/20 to-primary/5 p-4 rounded-xl border-2 border-primary/30 hover:border-primary/50 transition-all hover:scale-105 shadow-lg card-glow">
+                    <BookOpen className="h-6 w-6 text-primary animate-pulse" />
                     <span className="text-sm font-medium text-foreground">Interactive Modules</span>
                   </div>
-                  <div className="flex items-center space-x-3 bg-card/50 p-4 rounded-lg border border-border/30">
-                    <Shield className="h-6 w-6 text-secondary" />
+                  <div className="flex items-center space-x-3 backdrop-blur-sm bg-gradient-to-br from-secondary/20 to-secondary/5 p-4 rounded-xl border-2 border-secondary/30 hover:border-secondary/50 transition-all hover:scale-105 shadow-lg card-glow-secondary">
+                    <Shield className="h-6 w-6 text-secondary animate-pulse" />
                     <span className="text-sm font-medium text-foreground">Safety Certified</span>
                   </div>
-                  <div className="flex items-center space-x-3 bg-card/50 p-4 rounded-lg border border-border/30">
-                    <Users className="h-6 w-6 text-accent" />
+                  <div className="flex items-center space-x-3 backdrop-blur-sm bg-gradient-to-br from-accent/20 to-accent/5 p-4 rounded-xl border-2 border-accent/30 hover:border-accent/50 transition-all hover:scale-105 shadow-lg card-glow-accent">
+                    <Users className="h-6 w-6 text-accent animate-pulse" />
                     <span className="text-sm font-medium text-foreground">Community Learning</span>
                   </div>
-                  <div className="flex items-center space-x-3 bg-card/50 p-4 rounded-lg border border-border/30">
-                    <Award className="h-6 w-6 text-warning" />
+                  <div className="flex items-center space-x-3 backdrop-blur-sm bg-gradient-to-br from-tertiary/20 to-tertiary/5 p-4 rounded-xl border-2 border-tertiary/30 hover:border-tertiary/50 transition-all hover:scale-105 shadow-lg">
+                    <Award className="h-6 w-6 text-tertiary animate-pulse" />
                     <span className="text-sm font-medium text-foreground">Achievement System</span>
                   </div>
                 </div>
@@ -76,15 +77,16 @@ const Index = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     onClick={handleSignupClick}
-                    className="flex-1 bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground font-semibold py-3 transition-all duration-200"
+                    variant="gradient"
+                    className="flex-1 font-semibold py-6 text-lg animate-pulse-glow"
                   >
                     Start Learning
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                   <Button 
                     onClick={handleLoginClick}
                     variant="outline"
-                    className="flex-1 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-medium py-3 transition-all duration-200"
+                    className="flex-1 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-medium py-6 text-lg backdrop-blur-sm bg-background/50"
                   >
                     Sign In
                   </Button>
@@ -93,23 +95,23 @@ const Index = () => {
 
               {/* Right side - CTA Card */}
               <div className="flex justify-center lg:justify-end">
-                <div className="text-center space-y-6 bg-card p-8 rounded-2xl border border-border/50 backdrop-blur-sm" style={{ boxShadow: 'var(--shadow-xl)' }}>
-                  <h3 className="text-2xl font-bold text-foreground">Ready to Begin?</h3>
+                <div className="text-center space-y-6 backdrop-blur-md bg-gradient-to-br from-card/90 to-card/70 p-10 rounded-3xl border-2 border-primary/30 shadow-2xl card-glow-accent hover:scale-105 transition-all">
+                  <h3 className="text-3xl font-bold text-gradient">Ready to Begin?</h3>
                   <p className="text-muted-foreground text-lg leading-relaxed">
                     Join thousands of students learning essential safety skills
                   </p>
                   <div className="space-y-4">
                     <Button 
                       onClick={handleSignupClick}
-                      className="w-full bg-gradient-to-r from-secondary to-secondary-light hover:from-secondary-dark hover:to-secondary font-semibold py-3 transition-all duration-200 focus-ring"
-                      style={{ boxShadow: 'var(--shadow-md)' }}
+                      variant="forest"
+                      className="w-full font-semibold py-6 text-lg"
                     >
                       Create Account
                     </Button>
                     <Button 
                       onClick={handleLoginClick}
                       variant="outline"
-                      className="w-full border-2 border-border hover:bg-muted font-medium py-3 transition-all duration-200 focus-ring"
+                      className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-6 text-lg backdrop-blur-sm"
                     >
                       Sign In
                     </Button>
@@ -121,30 +123,31 @@ const Index = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="py-16 bg-card">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="py-16 bg-gradient-to-br from-card via-background to-card relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-secondary/10 via-transparent to-accent/10 opacity-50"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">Making Safety Education Accessible</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <h2 className="text-4xl font-bold text-rainbow mb-4">Making Safety Education Accessible</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 Join our growing community of prepared students and educators building safer communities together.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2">50K+</div>
-                <div className="text-muted-foreground">Students Trained</div>
+              <div className="text-center backdrop-blur-sm bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-2xl border-2 border-primary/20 hover:border-primary/40 transition-all hover:scale-105 card-glow">
+                <div className="text-5xl font-bold text-primary mb-2 animate-pulse">50K+</div>
+                <div className="text-muted-foreground font-medium">Students Trained</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-secondary mb-2">95%</div>
-                <div className="text-muted-foreground">Course Completion</div>
+              <div className="text-center backdrop-blur-sm bg-gradient-to-br from-secondary/10 to-secondary/5 p-6 rounded-2xl border-2 border-secondary/20 hover:border-secondary/40 transition-all hover:scale-105 card-glow-secondary">
+                <div className="text-5xl font-bold text-secondary mb-2 animate-pulse">95%</div>
+                <div className="text-muted-foreground font-medium">Course Completion</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-accent mb-2">4.9★</div>
-                <div className="text-muted-foreground">Student Rating</div>
+              <div className="text-center backdrop-blur-sm bg-gradient-to-br from-accent/10 to-accent/5 p-6 rounded-2xl border-2 border-accent/20 hover:border-accent/40 transition-all hover:scale-105 card-glow-accent">
+                <div className="text-5xl font-bold text-accent mb-2 animate-pulse">4.9★</div>
+                <div className="text-muted-foreground font-medium">Student Rating</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-warning mb-2">24/7</div>
-                <div className="text-muted-foreground">Available Learning</div>
+              <div className="text-center backdrop-blur-sm bg-gradient-to-br from-tertiary/10 to-tertiary/5 p-6 rounded-2xl border-2 border-tertiary/20 hover:border-tertiary/40 transition-all hover:scale-105">
+                <div className="text-5xl font-bold text-tertiary mb-2 animate-pulse">24/7</div>
+                <div className="text-muted-foreground font-medium">Available Learning</div>
               </div>
             </div>
           </div>

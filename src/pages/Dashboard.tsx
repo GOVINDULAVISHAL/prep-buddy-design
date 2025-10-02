@@ -116,8 +116,9 @@ const Dashboard = () => {
   // Redirect to login if not authenticated
   if (loading || profileLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center gradient-animated">
-        <div className="animate-pulse-glow rounded-full h-32 w-32 border-4 border-primary bg-primary/20"></div>
+      <div className="min-h-screen flex items-center justify-center gradient-animated relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/30 via-secondary/20 to-accent/30 opacity-50"></div>
+        <div className="animate-pulse-glow rounded-full h-32 w-32 border-4 border-primary bg-primary/20 shadow-2xl relative z-10"></div>
       </div>
     );
   }
