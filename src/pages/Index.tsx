@@ -55,15 +55,14 @@ const Index = () => {
                     <span className="text-sm font-medium text-primary">Smart Safety Learning Platform</span>
                   </div>
                   
-                  <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight">
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
                     <span className="bg-gradient-to-r from-primary via-secondary to-tertiary bg-clip-text text-transparent">
                       RAKSHA
                     </span>
                   </h1>
                   
-                  <p className="text-xl md:text-2xl text-foreground/80 max-w-xl leading-relaxed font-medium">
-                    Master disaster preparedness through interactive learning, gamified challenges, and expert guidance. 
-                    <span className="text-primary font-semibold"> Stay safe, stay prepared.</span>
+                  <p className="text-base md:text-lg text-foreground/80 max-w-xl leading-relaxed">
+                    Master disaster preparedness through interactive learning, gamified challenges, and expert guidance.
                   </p>
                 </div>
 
@@ -90,15 +89,15 @@ const Index = () => {
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
                   <Button 
                     onClick={handleSignupClick}
-                    className="flex-1 h-14 text-lg font-bold bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent shadow-glow-accent hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+                    className="flex-1 h-12 text-base font-bold bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent shadow-glow-accent hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
                   >
-                    Start Learning Free
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    Start Learning
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                   <Button 
                     onClick={handleLoginClick}
                     variant="outline"
-                    className="flex-1 h-14 text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                    className="flex-1 h-12 text-base font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
                   >
                     Sign In
                   </Button>
@@ -126,23 +125,23 @@ const Index = () => {
             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-tertiary"></div>
               <div className="relative p-12 md:p-16 text-center space-y-6">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Ready to Begin Your Safety Journey?
+                <h2 className="text-3xl md:text-4xl font-bold text-white">
+                  Ready to Begin?
                 </h2>
-                <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-                  Join thousands of students learning essential safety skills and building a safer tomorrow
+                <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
+                  Join thousands of students learning essential safety skills
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 max-w-md mx-auto">
                   <Button 
                     onClick={handleSignupClick}
-                    className="h-14 text-lg font-bold bg-white text-primary hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                    className="h-12 text-base font-bold bg-white text-primary hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
                   >
-                    Create Free Account
+                    Create Account
                   </Button>
                   <Button 
                     onClick={handleLoginClick}
                     variant="outline"
-                    className="h-14 text-lg font-semibold border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
+                    className="h-12 text-base font-semibold border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
                   >
                     Sign In
                   </Button>
@@ -156,10 +155,10 @@ const Index = () => {
         <div className="py-20 bg-gradient-to-br from-white via-blue-50/30 to-cyan-50/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-tertiary bg-clip-text text-transparent">
+              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-secondary to-tertiary bg-clip-text text-transparent">
                 Making Safety Education Accessible
               </h2>
-              <p className="text-foreground/70 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed">
+              <p className="text-foreground/70 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
                 Join our growing community of prepared students and educators building safer communities together.
               </p>
             </div>
