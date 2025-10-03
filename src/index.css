@@ -2,51 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Disaster Preparedness Education System Design System
-Blue-Green-Orange palette with Material Design inspiration
+/* Disaster Preparedness Education System - RAKSHA
+Warm Safety-Oriented Palette: Blue, Green, Orange
+Modern, Colorful, Professional Design
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    /* Background & Surface - Clean professional palette */
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    /* Background & Surface - Light gradient base */
+    --background: 200 40% 98%;
+    --foreground: 210 30% 20%;
     
     /* Cards & Surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 210 30% 20%;
     
     /* Popovers */
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 210 30% 20%;
     
-    /* Primary - Professional Blue */
-    --primary: 221 83% 53%;
+    /* Primary - Vibrant Safety Blue */
+    --primary: 212 95% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 221 83% 63%;
-    --primary-dark: 221 83% 43%;
-    --primary-glow: 221 83% 68%;
+    --primary-light: 212 95% 65%;
+    --primary-dark: 212 95% 45%;
+    --primary-glow: 212 95% 70%;
     
-    /* Secondary - Subtle Background */
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
-    --secondary-light: 210 40% 98%;
-    --secondary-dark: 210 40% 90%;
-    --secondary-glow: 210 40% 97%;
+    /* Secondary - Fresh Teal/Cyan */
+    --secondary: 185 75% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 185 75% 65%;
+    --secondary-dark: 185 75% 45%;
+    --secondary-glow: 185 75% 70%;
     
-    /* Accent - Professional Blue */
-    --accent: 221 83% 53%;
+    /* Accent - Warm Safety Orange */
+    --accent: 28 92% 58%;
     --accent-foreground: 0 0% 100%;
-    --accent-light: 221 83% 63%;
-    --accent-dark: 221 83% 43%;
-    --accent-glow: 221 83% 68%;
+    --accent-light: 28 92% 68%;
+    --accent-dark: 28 92% 48%;
+    --accent-glow: 28 92% 73%;
     
-    /* Tertiary - Success Green */
-    --tertiary: 142 71% 45%;
+    /* Tertiary - Vibrant Safety Green */
+    --tertiary: 155 65% 50%;
     --tertiary-foreground: 0 0% 100%;
-    --tertiary-light: 142 71% 55%;
-    --tertiary-dark: 142 71% 35%;
+    --tertiary-light: 155 65% 60%;
+    --tertiary-dark: 155 65% 40%;
     
     /* Success - Vibrant Green */
     --success: 140 100% 50%;
@@ -73,29 +74,34 @@ All colors MUST be HSL.
     --input: 214 32% 91%;
     --ring: 221 83% 53%;
     
-    /* Vibrant Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    /* Vibrant Safety Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-light)));
     --gradient-tertiary: linear-gradient(135deg, hsl(var(--tertiary)), hsl(var(--tertiary-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
-    --gradient-rainbow: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)), hsl(var(--tertiary)));
-    --gradient-sunset: linear-gradient(135deg, hsl(var(--tertiary)), hsl(var(--accent)));
-    --gradient-ocean: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--info)));
-    --gradient-forest: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--success)));
+    --gradient-hero: linear-gradient(120deg, hsl(200 50% 95%), hsl(185 60% 92%), hsl(195 55% 90%));
+    --gradient-blue-teal: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-orange-red: linear-gradient(135deg, hsl(var(--accent)), hsl(5 85% 60%));
+    --gradient-green-teal: linear-gradient(135deg, hsl(var(--tertiary)), hsl(var(--secondary)));
+    --gradient-warm: linear-gradient(135deg, hsl(var(--accent-light)), hsl(var(--accent)), hsl(var(--accent-dark)));
+    --gradient-cool: linear-gradient(135deg, hsl(var(--primary-light)), hsl(var(--primary)), hsl(var(--secondary)));
     
     /* Animated gradients */
-    --gradient-animated: linear-gradient(-45deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)), hsl(var(--tertiary)));
+    --gradient-animated: linear-gradient(-45deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--tertiary)), hsl(var(--accent)));
     
-    /* Enhanced Shadows with color */
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.3);
-    --shadow-glow-accent: 0 0 20px hsl(var(--accent) / 0.3);
-    --shadow-glow-secondary: 0 0 20px hsl(var(--secondary) / 0.3);
+    /* CTA Card gradient */
+    --gradient-cta: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--tertiary)) 100%);
+    
+    /* Enhanced Colorful Shadows */
+    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 24px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 32px -8px rgba(0, 0, 0, 0.12);
+    --shadow-2xl: 0 32px 48px -12px rgba(0, 0, 0, 0.16);
+    --shadow-glow-primary: 0 8px 32px hsl(var(--primary) / 0.25);
+    --shadow-glow-accent: 0 8px 32px hsl(var(--accent) / 0.25);
+    --shadow-glow-secondary: 0 8px 32px hsl(var(--secondary) / 0.25);
+    --shadow-glow-tertiary: 0 8px 32px hsl(var(--tertiary) / 0.25);
     
     /* Professional spacing */
     --spacing-xs: 0.25rem;
@@ -105,8 +111,8 @@ All colors MUST be HSL.
     --spacing-xl: 2rem;
     --spacing-2xl: 3rem;
     
-    /* Border radius for modern look */
-    --radius: 0.75rem;
+    /* Border radius for modern, friendly look */
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
