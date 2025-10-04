@@ -5,7 +5,7 @@ import { Footer } from "@/components/ui/footer";
 import { Button } from "@/components/ui/button";
 import { Shield, BookOpen, Users, Award, ArrowRight, Sparkles, TrendingUp, Clock } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import heroImage from "@/assets/hero-illustration.png";
+
 
 const Index = () => {
   const { user, loading } = useAuth();
@@ -104,52 +104,38 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Right side - Hero Illustration */}
+              {/* Right side - Ready to Begin Card */}
               <div className="relative animate-scale-in" style={{ animationDelay: '0.2s' }}>
-                <div className="relative">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-primary via-secondary to-tertiary rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
-                  <img 
-                    src={heroImage} 
-                    alt="Students learning disaster preparedness with safety symbols and achievement badges"
-                    className="relative rounded-3xl shadow-2xl w-full"
-                  />
+                <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-white p-8 md:p-12">
+                  <div className="relative space-y-6 text-center">
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                      Ready to Begin?
+                    </h2>
+                    <p className="text-base md:text-lg text-foreground/70 max-w-md mx-auto leading-relaxed">
+                      Join thousands of students learning essential safety skills
+                    </p>
+                    <div className="flex flex-col gap-4 pt-4">
+                      <Button 
+                        onClick={handleSignupClick}
+                        className="h-12 text-base font-bold bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent shadow-glow-accent hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+                      >
+                        Create Account
+                      </Button>
+                      <Button 
+                        onClick={handleLoginClick}
+                        variant="outline"
+                        className="h-12 text-base font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                      >
+                        Sign In
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* CTA Card Section */}
-        <div className="py-16 bg-white/50 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-tertiary"></div>
-              <div className="relative p-12 md:p-16 text-center space-y-6">
-                <h2 className="text-3xl md:text-4xl font-bold text-white">
-                  Ready to Begin?
-                </h2>
-                <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
-                  Join thousands of students learning essential safety skills
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 max-w-md mx-auto">
-                  <Button 
-                    onClick={handleSignupClick}
-                    className="h-12 text-base font-bold bg-white text-primary hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
-                  >
-                    Create Account
-                  </Button>
-                  <Button 
-                    onClick={handleLoginClick}
-                    variant="outline"
-                    className="h-12 text-base font-semibold border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
-                  >
-                    Sign In
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Stats Section */}
         <div className="py-20 bg-gradient-to-br from-white via-blue-50/30 to-cyan-50/30">
