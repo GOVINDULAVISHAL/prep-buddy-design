@@ -49,7 +49,7 @@ const Index = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left side - Hero content */}
               <div className="space-y-4 animate-fade-in">
-                <div className="space-y-4">
+                <div className="space-y-2">
                   <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
                     <Sparkles className="h-4 w-4 text-primary" />
                     <span className="text-sm font-medium text-primary">Smart Safety Learning Platform</span>
