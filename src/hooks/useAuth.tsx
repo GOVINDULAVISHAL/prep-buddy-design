@@ -18,15 +18,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    return {
-      user: null,
-      session: null,
-      loading: true,
-      signUp: async () => ({ error: null }),
-      signIn: async () => ({ error: null }),
-      signInWithGoogle: async () => ({ error: null }),
-      signOut: async () => {},
-    };
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 };
