@@ -125,14 +125,24 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signInWithGoogle = async () => {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      console.log('Starting Google Sign-In...');
+      console.log('Current origin:', window.location.origin);
+      
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         },
       });
 
+      console.log('Google Sign-In response:', { data, error });
+
       if (error) {
+        console.error('Google Sign-In error:', error);
         toast({
           title: "Google Sign In Error",
           description: error.message,
@@ -142,9 +152,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       return { error };
     } catch (error: any) {
+      console.error('Google Sign-In exception:', error);
       toast({
         title: "Google Sign In Error",
-        description: "An unexpected error occurred",
+        description: error?.message || "An unexpected error occurred",
         variant: "destructive",
       });
       return { error };
