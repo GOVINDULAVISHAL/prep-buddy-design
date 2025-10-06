@@ -1,17 +1,39 @@
 import { useState, useEffect } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LoginForm } from "@/components/auth/login-form";
 import { SignupForm } from "@/components/auth/signup-form";
+import { ResetPasswordForm } from "@/components/auth/reset-password-form";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Auth() {
   const [showSignup, setShowSignup] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get('mode') === 'signup';
   });
+  const [showResetPassword, setShowResetPassword] = useState(false);
   const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  // Check if this is a password reset redirect
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const isReset = params.get('reset') === 'true';
+    
+    // Check for password recovery hash in URL
+    const checkRecovery = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session && window.location.hash.includes('type=recovery')) {
+        setShowResetPassword(true);
+      } else if (isReset) {
+        setShowResetPassword(true);
+      }
+    };
+    
+    checkRecovery();
+  }, []);
 
   // Redirect authenticated users to dashboard
   if (loading) {
@@ -38,7 +60,15 @@ export default function Auth() {
       </Link>
       
       <div className="w-full max-w-md relative z-10 backdrop-blur-sm bg-background/80 p-8 rounded-3xl border-2 border-primary/20 shadow-2xl">
-        {showSignup ? (
+        {showResetPassword ? (
+          <ResetPasswordForm
+            onSuccess={() => {
+              setShowResetPassword(false);
+              setShowSignup(false);
+              navigate('/auth');
+            }}
+          />
+        ) : showSignup ? (
           <SignupForm
             onClose={() => setShowSignup(false)}
             onSwitchToLogin={() => setShowSignup(false)}
