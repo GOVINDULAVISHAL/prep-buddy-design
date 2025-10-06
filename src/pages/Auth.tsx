@@ -14,29 +14,42 @@ export default function Auth() {
     return params.get('mode') === 'signup';
   });
   const [showResetPassword, setShowResetPassword] = useState(false);
+  const [isCheckingRecovery, setIsCheckingRecovery] = useState(true);
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
   // Check if this is a password reset redirect
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const isReset = params.get('reset') === 'true';
-    
-    // Check for password recovery hash in URL
-    const checkRecovery = async () => {
-      const { data } = await supabase.auth.getSession();
-      if (data.session && window.location.hash.includes('type=recovery')) {
-        setShowResetPassword(true);
-      } else if (isReset) {
-        setShowResetPassword(true);
+    const checkForRecovery = async () => {
+      setIsCheckingRecovery(true);
+      
+      // Supabase puts the recovery token in the URL hash
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const accessToken = hashParams.get('access_token');
+      const type = hashParams.get('type');
+      
+      if (type === 'recovery' && accessToken) {
+        // The session should be automatically set by Supabase
+        // Wait a moment for it to be established
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (session) {
+          setShowResetPassword(true);
+          // Clean up URL
+          window.history.replaceState({}, document.title, '/auth');
+        }
       }
+      
+      setIsCheckingRecovery(false);
     };
     
-    checkRecovery();
+    checkForRecovery();
   }, []);
 
-  // Redirect authenticated users to dashboard
-  if (loading) {
+  // Show loading while checking for recovery session
+  if (loading || isCheckingRecovery) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-green-50">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
@@ -44,7 +57,8 @@ export default function Auth() {
     );
   }
 
-  if (user) {
+  // Only redirect if not in password reset mode
+  if (user && !showResetPassword) {
     return <Navigate to="/dashboard" replace />;
   }
 
