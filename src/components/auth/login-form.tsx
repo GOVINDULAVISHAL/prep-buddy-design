@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Mail, Lock, Chrome } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -23,7 +26,11 @@ export function LoginForm({ onClose, onSwitchToSignup }: LoginFormProps) {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [showResetDialog, setShowResetDialog] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [isResetLoading, setIsResetLoading] = useState(false);
   const { signIn, signInWithGoogle } = useAuth();
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,6 +67,38 @@ export function LoginForm({ onClose, onSwitchToSignup }: LoginFormProps) {
     
     if (!error) {
       onClose();
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    if (!resetEmail || !resetEmail.includes('@')) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsResetLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+      redirectTo: `${window.location.origin}/auth?reset=true`,
+    });
+    setIsResetLoading(false);
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Check your email",
+        description: "We've sent you a password reset link",
+      });
+      setShowResetDialog(false);
+      setResetEmail("");
     }
   };
 
@@ -143,6 +182,7 @@ export function LoginForm({ onClose, onSwitchToSignup }: LoginFormProps) {
             variant="link" 
             className="text-sm text-muted-foreground hover:text-primary"
             type="button"
+            onClick={() => setShowResetDialog(true)}
           >
             Forgot your password?
           </Button>
@@ -159,6 +199,51 @@ export function LoginForm({ onClose, onSwitchToSignup }: LoginFormProps) {
           </div>
         </div>
       </CardContent>
+
+      <Dialog open={showResetDialog} onOpenChange={setShowResetDialog}>
+        <DialogContent className="sm:max-w-md bg-card">
+          <DialogHeader>
+            <DialogTitle className="text-foreground">Reset Password</DialogTitle>
+            <DialogDescription className="text-muted-foreground">
+              Enter your email and we'll send you a link to reset your password.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="reset-email" className="text-foreground">Email</Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="reset-email"
+                  type="email"
+                  placeholder="your@email.com"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  className="pl-10 border-border bg-background"
+                />
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={() => setShowResetDialog(false)}
+                className="flex-1 border-border"
+                type="button"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handlePasswordReset}
+                disabled={isResetLoading}
+                className="flex-1 bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary"
+                type="button"
+              >
+                {isResetLoading ? "Sending..." : "Send Reset Link"}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Card>
   );
 }
